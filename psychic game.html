@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>The Psychic Game</title>
+  </head>
+  <body>
+
+    
+          <h1> The Psychic Game </h1>
+
+          <p> Guess what letter I'm thinking of.</p>
+          <p>Wins: <div id="wins"> </div></p>
+          <p>Losses: <div id="losses"> </div> </p>
+          <p>Guesses Left: <div id="guessesLeft"> </div> </p>
+
+         
+
+    <div>
+      <p> Your choices so far: <div id="guesses"> </div> </p>
+    </div>
+
+
+        
+
+    <script type="text/javascript">
+
+      var abc = "abcdefghijklmnopqrstuvwxyz";
+
+      
+
+      // split 'abc' into an array
+      var abcArray = abc.split("");
+
+      var theLetter = abcArray[Math.floor(Math.random() * abcArray.length)];
+
+      // Variables for tracking our wins, losses and ties. They begin at 0.
+      var wins = 0;
+      var losses = 0;
+      var guessesLeft = 9;
+
+      document.getElementById("wins").innerHTML = wins;
+      document.getElementById("losses").innerHTML = losses;
+      document.getElementById("guessesLeft").innerHTML = guessesLeft;
+
+      // When the user presses a key, it will run the following function...
+      document.onkeyup = function(event) {
+
+        // Determine which key was pressed
+        var userGuess = event.key;
+
+        document.getElementById("guessesLeft").innerHTML = guessesLeft;
+        
+       
+
+        // this will get us a random letter from the abcArray
+
+        
+
+        console.log( "the letter to guess was " + theLetter);
+        console.log( "the user guessed " + userGuess);
+
+        // we need a way to loop throught the array and compare the letters
+
+        for (i = 0; i < abcArray.length; i++) {
+
+
+          
+
+          if (userGuess == theLetter) {
+
+
+            wins++;
+            theLetter = abcArray[Math.floor(Math.random() * abcArray.length)];
+            console.log( "the letter to guess was " + theLetter);
+            document.getElementById("wins").innerHTML = wins;
+            document.getElementById("guesses").innerHTML = "";
+            console.log("You won the game!");
+            guessesLeft = 9;
+            return;
+
+
+
+          } 
+
+          guessesLeft--; 
+
+          if (userGuess != theLetter) {
+            
+        
+
+            if (guessesLeft == 0) {
+                losses++;
+                document.getElementById("losses").innerHTML = losses;
+                document.getElementById("guesses").innerHTML = "";
+                guessesLeft = 9;
+                console.log("THIS WILL RUN IF YOU HAVE 0 GUESSES LEFT");
+                return;
+
+              }
+
+            break;
+          }
+
+
+
+
+
+            
+
+          
+        }
+
+        var element = document.createElement("div");
+        
+
+        element.innerHTML = userGuess;
+
+        document.getElementById("guesses").appendChild(element);
+
+        document.getElementById("guessesLeft").innerHTML = guessesLeft;
+
+
+
+        };
+
+    </script>
+
+  </body>
+</html>
